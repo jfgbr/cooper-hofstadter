@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#pages#partidas.xhtml"
+  PATH="/pages/partidas.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#partidas.xhtml:0" NAME="item"
+   PATH="/pages/partidas.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="partidas::#pages#partidas.xhtml"
+    NAME="output" PATH="/pages/partidas.xhtml"
+    TARGET="rules:#pages#partidas.xhtml" TITLE="partidas" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#usuario.xhtml"
+  PATH="/pages/usuario.xhtml" SHAPE="48,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#usuario.xhtml:0" NAME="item"
+   PATH="/pages/usuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="usuario::#pages#usuario.xhtml" NAME="output"
+    PATH="/pages/usuario.xhtml" TARGET="rules:#pages#usuario.xhtml"
+    TITLE="usuario" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

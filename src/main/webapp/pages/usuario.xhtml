@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+	  template="/templates/template.xhtml">
+    <ui:define name="content">
+    	<p:resource></p:resource>
+    	<h:form id="formUsuario">
+			<br />
+		  	<p:panel header="Incluir um Participante" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+			  	<h:panelGrid columns="4" width="100%">
+				  	<h:outputText value="Nome" />
+				  	<h:inputText value="#{usuarioMB.usuario.nome}" />
+		
+					<h:outputText value="Sobrenome" />
+					<h:inputText value="#{usuarioMB.usuario.sobrenome}" />
+					
+					<h:outputText value="Apelido" />
+					<h:inputText value="#{usuarioMB.usuario.apelido}" />
+					
+					<h:outputText value="E-mail" />
+					<h:inputText value="#{usuarioMB.usuario.email}" />
+					
+					<h:outputText value="Senha" />
+					<h:inputText value="#{usuarioMB.usuario.senha}" />
+					
+					<h:outputText value="Data de Nascimento"/>
+					<p:calendar  value="#{usuarioMB.usuario.dataNascimento}" inputStyle="width:90px" pattern="dd/MM/yyyy"/>
+				  	
+				  	<h:outputText value="Time" />
+				  	<h:selectOneMenu value="#{usuarioMB.usuario.time.idTime}">
+				  		<f:selectItems value="#{timeMB.comboTimes}"/>
+				  	</h:selectOneMenu>
+			  	
+			  	</h:panelGrid>
+			  	
+			  	<br/>
+				<h:commandButton rendered="false" value="Salvar" actionListener="#{usuarioMB.saveUsuario}" />
+				<p:commandButton value="Salvar" update="lstUsuarios" 
+					actionListener="#{usuarioMB.saveUsuario}" style="margin-right:20px;" />
+			</p:panel>
+    		<br/>
+    		<p:panel header="Lista de Participantes" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+				<h:panelGrid column="1" width="98%">
+				  	<p:dataTable id="lstUsuarios" value="#{usuarioMB.usuarios}" var="item"
+				  		paginator="true" rows="10"
+                 		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 		rowsPerPageTemplate="5,10,15">
+				  		<p:column>
+				  			<f:facet name="header">
+						    	<h:outputText value="Nome" />
+						    </f:facet>  
+				  			<h:outputText value="#{item.nome}"/>
+				  		</p:column>
+				  		<p:column>
+				  			<f:facet name="header">
+						    	<h:outputText value="Sobrenome" />
+						    </f:facet>  
+				  			<h:outputText value="#{item.sobrenome}"/>
+				  		</p:column>
+				  		<p:column>
+				  			<f:facet name="header">
+						    	<h:outputText value="Time" />
+						    </f:facet>  
+				  			<h:outputText value="#{item.time.abreviacao}"/>
+				  		</p:column>
+				  		
+				  		
+				  		<p:column style="text-align:center;width:20px">
+							<p:commandLink action="#{usuarioMB.remove}" update="formUsuario" style="color:red;font-weight:bold;text-decoration:none;">
+								<h:outputText value=" X "/>
+								<f:setPropertyActionListener value="#{item}" target="#{usuarioMB.usuarioExcluido}" />
+							</p:commandLink>
+						</p:column>
+				  	</p:dataTable>
+			  	</h:panelGrid>
+		  	</p:panel>
+		  	
+	  	</h:form>
+	</ui:define>
+</ui:composition>

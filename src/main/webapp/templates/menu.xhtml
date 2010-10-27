@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form id="formMenu">
+		<p:growl id="messages"/>
+	
+		<p:menubar>
+			<p:submenu>
+				<f:facet name="label">
+					<p:menuitem value="Participantes"  url="/pages/usuario.jsf" ></p:menuitem>
+				</f:facet>
+			</p:submenu>
+			<p:submenu>
+				<f:facet name="label">
+					<p:menuitem value="Países"  url="/pages/pais.jsf" ></p:menuitem>
+				</f:facet>
+			</p:submenu>
+			<p:submenu>
+				<f:facet name="label">
+					<p:menuitem value="Times"  url="/pages/time.jsf" ></p:menuitem>
+				</f:facet>
+			</p:submenu>
+			<p:submenu>
+				<f:facet name="label">
+					<p:menuitem value="Partidas"  url="/pages/partidas.jsf" ></p:menuitem>
+				</f:facet>
+			</p:submenu>
+			<p:submenu>
+				<f:facet name="label">
+					<p:menuitem value="Campeonatos"  url="/pages/campeonatos.jsf" ></p:menuitem>
+				</f:facet>
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+</ui:composition>

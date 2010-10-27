@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"     
+	  template="/templates/template.xhtml">
+
+ 	<ui:define name="content">
+    	<h:form id="formTimes">
+			<br />
+		  	<p:panel header="Incluir um Time" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+			  	<h:panelGrid columns="4" width="100%">
+				  	<h:outputText value="Nome" />
+				  	<h:inputText value="#{timeMB.time.nome}" />
+		
+					<h:outputText value="Abreviação" />
+					<h:inputText value="#{timeMB.time.abreviacao}" />
+		
+					<h:outputText value="Sigla" />
+					<h:inputText value="#{timeMB.time.sigla}" />
+					
+					<h:outputText value="Pais" />
+					<h:selectOneMenu value="#{timeMB.time.pais.idPais}">
+						<f:selectItems value="#{paisMB.comboPaises}"/>
+			  		</h:selectOneMenu>	
+				</h:panelGrid>
+			  	
+			  	<br/>
+				<h:commandButton rendered="false" value="Salvar" actionListener="#{timeMB.save}" />
+				<p:commandButton value="Salvar" update="lstTimes" 
+					actionListener="#{timeMB.save}" style="margin-right:20px;" />
+			</p:panel>
+			<br />
+		  	<p:panel header="Lista de Times" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+				<p:dataTable id="lstTimes" value="#{timeMB.times}" var="item"
+				 	paginator="true" rows="10"
+	                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                rowsPerPageTemplate="5,10,15">
+					<p:column>
+						<f:facet name="header">
+					    	<h:outputText value="Nome" />
+					    </f:facet>  
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+					    	<h:outputText value="Abreviação" />
+					    </f:facet>  
+						<h:outputText value="#{item.abreviacao}"/>
+					</p:column>
+					<p:column style="width:30px">
+						<f:facet name="header">
+					    	<h:outputText value="Sigla" />
+					    </f:facet>  
+						<h:outputText value="#{item.sigla}"/>
+					</p:column>
+					<p:column style="text-align:center;width:20px">
+						<p:commandLink action="#{timeMB.remove}" update="formTimes" style="color:red;font-weight:bold;text-decoration:none;">
+							<h:outputText value=" X "/>
+							<f:setPropertyActionListener value="#{item}" target="#{timeMB.timeExcluido}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

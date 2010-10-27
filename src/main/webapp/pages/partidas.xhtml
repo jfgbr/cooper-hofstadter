@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"     
+	  template="/templates/template.xhtml">
+<!--    <f:facet name="header">   -->
+<!--		<h:outputText value="Partidas" /> -->
+<!--    </f:facet>-->
+    
+     <ui:define name="content">
+    	<h:form id="formPartidas"> 
+			<br />
+		  	<p:panel header="Incluir uma Partida" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+		    	<br />
+		    	
+		    	<h:outputText value="Data da Partida" />
+				<p:calendar  value="#{partidaMB.partida.dataPartida}" inputStyle="width:85px" pattern="dd/MM/yyyy" />
+		  		<br />
+		  		
+			  	<h:selectOneMenu value="#{partidaMB.partida.participanteByIdMandante.usuario.idUsuario}">
+			  		<f:selectItems value="#{usuarioMB.comboUsuarios}"/>
+			  	</h:selectOneMenu>
+			  	
+			  	<h:selectOneMenu value="#{partidaMB.partida.participanteByIdMandante.time.idTime}">
+			  		<f:selectItems value="#{timeMB.comboTimes}"/>
+			  	</h:selectOneMenu>
+			  	
+			  	<h:inputText maxlength="2" value="#{partidaMB.partida.golsMandante}" style="width : 18px;"/>
+			  	<h:outputText value=" X "/>
+			  	<h:inputText maxlength="2" value="#{partidaMB.partida.golsVisitante}" style="width : 18px;"/>
+			  	
+			  	<h:selectOneMenu value="#{partidaMB.partida.participanteByIdVisitante.time.idTime}">
+			  		<f:selectItems value="#{timeMB.comboTimes}"/>
+			  	</h:selectOneMenu>
+			  	<h:selectOneMenu value="#{partidaMB.partida.participanteByIdVisitante.usuario.idUsuario}">
+			  		<f:selectItems value="#{usuarioMB.comboUsuarios}"/>
+			  	</h:selectOneMenu>
+			  	
+			  	<br/>
+				<h:commandButton rendered="false" value="Salvar" actionListener="#{partidaMB.save}" />
+				<p:commandButton value="Salvar" update="lstPartidas" ajax="true"
+					actionListener="#{partidaMB.save}" style="margin-right:20px;" />	
+			</p:panel>
+    	<br />
+		  	<p:panel header="Lista de Partidas" id="pnlLstPartidas"
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+		    	<br />
+		    	<p:messages />
+			    <p:dataTable id="lstPartidas" value="#{partidaMB.partidas}" var="item"
+			    	 paginator="true" rows="15"
+	                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                 rowsPerPageTemplate="5,10,15">
+	                 
+	                 <p:columnGroup type="header">
+			            <p:row>
+			                <p:column colspan="2" headerText="Jogador Mandante" />
+			                <p:column rowpan="2"  headerText="Placar" />
+			                <p:column colspan="2" headerText="Jogador Visitante" />
+			                <p:column rowpan="2" headerText="Data da Partida" />
+			                <p:column rowpan="2" headerText="" />
+			            </p:row>
+			
+			            <p:row>
+			                <p:column colspan="1" headerText="Nome" />
+			                <p:column colspan="1" headerText="Time" />
+			                <p:column colspan="1" headerText="Nome" />
+			                <p:column colspan="1" headerText="Time" />
+			            </p:row>
+			        </p:columnGroup>
+	                 
+					<p:column>
+<!--						<f:facet name="header">-->
+<!--					    	<h:outputText value="Jogador 1" />-->
+<!--					    </f:facet>  -->
+						<h:outputText value="#{item.participanteByIdMandante.usuario.nome}"/>
+					</p:column>
+					<p:column>
+<!--						<f:facet name="header">-->
+<!--					    	<h:outputText value="Time 1" />-->
+<!--					    </f:facet>  -->
+						<h:outputText value="#{item.participanteByIdMandante.time.abreviacao}"/>
+					</p:column>
+					<p:column style="text-align:center;">
+<!--						<f:facet name="header">-->
+<!--					    	<h:outputText value="Placar" />-->
+<!--					    </f:facet>  -->
+						<h:outputText value="#{item.golsCasa} X #{item.golsVisitante}"/>
+					</p:column>
+					<p:column>
+<!--						<f:facet name="header">-->
+<!--					    	<h:outputText value="Jogador 2" />-->
+<!--					    </f:facet>  -->
+						<h:outputText value="#{item.usuarioByIdUsuarioVisitante.nome}"/>
+					</p:column>
+					<p:column>
+<!--						<f:facet name="header">-->
+<!--					    	<h:outputText value="Time 2" />-->
+<!--					    </f:facet>  -->
+						<h:outputText value="#{item.participanteByIdVisitante.time.abreviacao}"/>
+					</p:column>
+					<p:column style="width:50px">
+<!--						<f:facet name="header">-->
+<!--					    	<h:outputText value="Data da Partida" />-->
+<!--					    </f:facet>  -->
+						<h:outputText value="#{item.dataPartida}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+					    </h:outputText>
+					</p:column>
+					<p:column style="text-align:center;width:20px">
+						<p:commandLink action="#{partidaMB.remove}" update="formPartidas" style="color:red;font-weight:bold;text-decoration:none;">
+							<h:outputText value=" X "/>
+							<f:setPropertyActionListener value="#{item}" target="#{partidaMB.partidaExcluida}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+				<br />
+			</p:panel>			
+		</h:form>
+	</ui:define>
+</ui:composition>

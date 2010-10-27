@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+	  template="/templates/template.xhtml">
+<!--    <f:facet name="header">-->
+<!--    	<h:outputText value="Paises" />-->
+<!--    </f:facet>   -->
+	<ui:define name="content">
+    	<h:form id="formPaises">
+    		<br />
+		  	<p:panel header="Incluir um País" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+			  	<h:panelGrid columns="2" width="100%">
+				  	<h:outputText value="Nome" />
+				  	<h:inputText value="#{paisMB.pais.nome}" />
+		
+					<h:outputText value="Sigla" />
+					<h:inputText value="#{paisMB.pais.sigla}" />
+				</h:panelGrid>
+			  	
+			  	<br/>
+				<h:commandButton rendered="false" value="Salvar" actionListener="#{paisMB.save}" />
+				<p:commandButton value="Salvar" update="lstPaises" 
+					actionListener="#{paisMB.save}" style="margin-right:20px;" />
+			</p:panel>
+    		<br />
+		  	<p:panel header="Lista de Países" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+			
+				<p:dataTable id="lstPaises" value="#{paisMB.paises}" var="item" style="width:400px"
+				 	paginator="true" rows="10" 
+	                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                rowsPerPageTemplate="5,10,15">
+					<p:column>
+						<f:facet name="header">
+					    	<h:outputText value="Nome" />
+					    </f:facet>  
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					<p:column style="width:30px">
+						<f:facet name="header">
+					    	<h:outputText value="Sigla" />
+					    </f:facet>  
+						<h:outputText value="#{item.sigla}"/>
+					</p:column>
+					<p:column style="text-align:center;width:20px">
+						<p:commandLink action="#{paisMB.remove}" update="formPaises" style="color:red;font-weight:bold;text-decoration:none;">
+							<h:outputText value=" X "/>
+							<f:setPropertyActionListener value="#{item}" target="#{paisMB.paisExcluido}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			
+	    </h:form>
+    </ui:define>
+</ui:composition>
