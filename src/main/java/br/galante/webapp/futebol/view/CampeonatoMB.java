@@ -39,10 +39,13 @@ public class CampeonatoMB implements Serializable {
 	private DualListModel<Usuario> usuarios;
 	private DualListModel<Time> times;
 	
+	private DualListModel<String> teste;
+	
 	public void save(ActionEvent actionEvent){
 		try {
 			campeonatoDAO.insert(campeonato);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Partida registrada com sucesso!"));
+			campeonato = new Campeonato();
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro ao gravar a partida!"));
@@ -51,7 +54,7 @@ public class CampeonatoMB implements Serializable {
 	
 	public void remove(){
 		try {
-			campeonatoDAO.remove(campeonatoDAO.findById(campeonato.getIdCampeonato()));
+			campeonatoDAO.remove(campeonatoDAO.findById(campeonatoExcluido.getIdCampeonato()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -115,5 +118,23 @@ public class CampeonatoMB implements Serializable {
 
 	public void setTimes(DualListModel<Time> times) {
 		this.times = times;
+	}
+
+	public DualListModel<String> getTeste() {
+		if (teste==null){
+			List<String> source = new ArrayList<String>();
+			List<String> target = new ArrayList<String>();
+			source.add("Istanbul");
+			source.add("Ankara");
+			source.add("Izmir");
+			source.add("Antalya");
+			source.add("Bursa");
+			teste = new DualListModel<String>(source, target);
+		}
+		return teste;
+	}
+
+	public void setTeste(DualListModel<String> teste) {
+		this.teste = teste;
 	}
 }

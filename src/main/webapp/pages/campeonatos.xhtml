@@ -18,14 +18,14 @@
 					<h:inputText value="#{campeonatoMB.campeonato.qtdGrupos}"/>
 				</h:panelGrid>
 		  		<br />
-		  		<p:commandButton value="Salvar" update="lstUsuarios" 
+		  		<p:commandButton value="Salvar" update="lstCampeonatos" 
 					actionListener="#{campeonatoMB.save}" style="margin-right:20px;" />
 		  	</p:panel>
 		  	<br />
-		  	<p:panel header="Lista de Campeonatos" 
+		  	<p:panel header="Lista de Campeonatos"
     			style="width:95%;margin-left: auto;margin-right: auto;">
 			
-				<p:dataTable id="lstPaises" value="#{campeonatoMB.campeonatos}" var="item" style="width:400px"
+				<p:dataTable id="lstCampeonatos" value="#{campeonatoMB.campeonatos}" var="item" style="width:400px"
 				 	paginator="true" rows="10" 
 	                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                rowsPerPageTemplate="5,10,15"
@@ -59,15 +59,34 @@
 				</p:dataTable>
 			</p:panel>
 			<br />
+				
 			<p:panel id="pnlCampeonatoSelecionado" header="#{campeonatoMB.campeonatoSelecionado.nome}" 
     			style="width:95%;margin-left: auto;margin-right: auto;" rendered="#{not empty campeonatoMB.campeonatoSelecionado}">
-    			<p:pickList value="#{campeonatoMB.usuarios}"
-                    var="item" converter="usuario"
-                    itemLabel="#{item.nome}" 
-                    itemValue="#{item}" >
-			        <f:facet name="sourceCaption">r</f:facet>
-			        <f:facet name="targetCaption">s</f:facet>
-			    </p:pickList>
+    			<h:panelGrid columns="4">
+    				<h:panelGroup>
+	    			<h:outputText value="Selecionar participantes:" /><br/>
+					<p:pickList value="#{campeonatoMB.usuarios}"
+	                    var="item" converter="usuarioConverter"
+	                    itemLabel="#{item.nome}"
+	                    itemValue="#{item}" >
+				    </p:pickList>
+				   	</h:panelGroup>
+				   	<h:panelGroup>
+	    			<h:outputText value="Selecionar times:" /><br/>
+				    <p:pickList value="#{campeonatoMB.times}"
+	                    var="item" converter="timeConverter"
+	                    itemLabel="#{item.abreviacao}"
+	                    itemValue="#{item}" >
+				    </p:pickList>
+				    </h:panelGroup>
+			    </h:panelGrid>
+<!--    			<p:pickList value="#{campeonatoMB.usuarios}"-->
+<!--                    var="item" converter="usuario"-->
+<!--                    itemLabel="#{item.nome}" -->
+<!--                    itemValue="#{item}" >-->
+<!--			        <f:facet name="sourceCaption">r</f:facet>-->
+<!--			        <f:facet name="targetCaption">s</f:facet>-->
+<!--			    </p:pickList>-->
 			    <br />
 <!--			    <p:pickList value="#{campeonatoMB.times}"-->
 <!--                    var="item" iconOnly="true" effect="bounce"-->

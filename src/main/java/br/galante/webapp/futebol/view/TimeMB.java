@@ -35,6 +35,7 @@ public class TimeMB extends GenericMB<Time> implements Serializable {
 		try {
 			timeDAO.insert(time);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Os dados foram gravados com sucesso!"));
+			time = new Time();
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro ao gravar os dados!"));

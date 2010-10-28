@@ -33,7 +33,7 @@ public class UsuarioConverter implements Converter {
         if (value == null) {
             return null;
         } else {
-            return String.valueOf(((Usuario) value).getNome());
+            return String.valueOf(((Usuario) value).getIdUsuario());
         }
     }
 }

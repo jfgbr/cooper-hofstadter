@@ -4,6 +4,11 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 */
 
+.ui-picklist-source, .ui-picklist-target {
+                        width: 150px;
+                        height: 200px;
+                }
+
 /* Layout helpers
 ----------------------------------*/
 .ui-helper-hidden { display: none; }

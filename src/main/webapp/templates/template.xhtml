@@ -8,7 +8,7 @@
 	<title>Futebol Virtual</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
-	<h:outputStylesheet name="css/dark-hive/skin.css" />
+<!--	<h:outputStylesheet name="css/dark-hive/skin.css" />-->
 	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/dark-hive/skin.css" />
 </h:head>
 <h:body>
@@ -37,7 +37,7 @@
 		<p:layoutUnit position="top" height="58" resizable="false" style="text-align:center;" closable="false" collapsible="false" visible="true">
 			<ui:insert name="top" >
 					<h:panelGrid columns="1" width="100%" rowClasses="ui-panel-titlebar ui-widget-header ui-corner-all">
-<!--						<h:outputText value="Futebol Virtual" style="margen-left:auto;font-size:36px;"/>-->
+						<h:outputText value="Cooper-Hofstadter" style="margen-left:auto;font-size:36px;"/>
 					</h:panelGrid>
 <!--				style="text-align:center;"				-->
 					<p:ajaxStatus>
@@ -64,7 +64,7 @@
 			<ui:insert name="right"><h:outputText value="East unit content." /></ui:insert>
 		</p:layoutUnit>
 		
-		<p:layoutUnit position="center" resizable="false">
+		<p:layoutUnit position="center" resizable="false" scrollable="true">
 			<ui:include src="/templates/menu.xhtml" />
 			<br />
 			<ui:insert name="content">This fullPage layout consists of five different layoutUnits which are resizable and closable by default.</ui:insert>

@@ -30,6 +30,7 @@ public class PartidaMB implements Serializable {
 //			partida.setDataOperacao(GregorianCalendar.getInstance().getTime());
 			partidaDAO.insert(partida);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Partida registrada com sucesso!"));
+			partida = new Partida();
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro ao gravar a partida!"));

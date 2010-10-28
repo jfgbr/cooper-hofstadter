@@ -33,6 +33,7 @@ public class UsuarioMB extends GenericMB<Usuario> implements Serializable {
 		try {
 			usuarioDAO.insert(usuario);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Os dados foram gravados com sucesso!"));
+			usuario = new Usuario();
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro ao gravar os dados!"));

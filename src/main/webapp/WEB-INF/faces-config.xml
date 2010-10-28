@@ -24,7 +24,11 @@
 	</navigation-rule>
 	
 	<converter>
-        <converter-id>usuario</converter-id>
+        <converter-id>usuarioConverter</converter-id>
         <converter-class>br.galante.webapp.futebol.converter.UsuarioConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>timeConverter</converter-id>
+        <converter-class>br.galante.webapp.futebol.converter.TimeConverter</converter-class>
     </converter>
 </faces-config>

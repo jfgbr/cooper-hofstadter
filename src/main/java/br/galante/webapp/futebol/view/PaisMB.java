@@ -31,6 +31,7 @@ public class PaisMB implements Serializable {
 		try {
 			paisDAO.insert(pais);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("País registrado com sucesso!"));
+			pais = new Pais();
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro ao gravar o país!"));
