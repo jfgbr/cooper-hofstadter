@@ -1,8 +1,86 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.prime.com.tr/ui">
-	<body>
-		<form action="">
-		</form>
-	</body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"     
+	  template="/templates/template.xhtml">
+	  
+	  <ui:define name="content">
+    	<h:form id="formCampeonato">
+    		<p:panel header="Incluir um Campeonato" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+    			<h:panelGrid columns="2">
+			    	<h:outputText value="Nome" />
+					<h:inputText value="#{campeonatoMB.campeonato.nome}"/>
+			  		
+			  		<h:outputText value="Quantidade de grupos" />
+					<h:inputText value="#{campeonatoMB.campeonato.qtdGrupos}"/>
+				</h:panelGrid>
+		  		<br />
+		  		<p:commandButton value="Salvar" update="lstUsuarios" 
+					actionListener="#{campeonatoMB.save}" style="margin-right:20px;" />
+		  	</p:panel>
+		  	<br />
+		  	<p:panel header="Lista de Campeonatos" 
+    			style="width:95%;margin-left: auto;margin-right: auto;">
+			
+				<p:dataTable id="lstPaises" value="#{campeonatoMB.campeonatos}" var="item" style="width:400px"
+				 	paginator="true" rows="10" 
+	                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                rowsPerPageTemplate="5,10,15"
+	               >
+<!--	                selection="#{campeonatoMB.campeonatoSelecionado}" selectionMode="single"-->
+					<p:column>
+						<f:facet name="header">
+					    	<h:outputText value="Nome" />
+					    </f:facet>  
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					<p:column style="width:30px">
+						<f:facet name="header">
+					    	<h:outputText value="Quantidade de grupos" />
+					    </f:facet>  
+						<h:outputText value="#{item.qtdGrupos}"/>
+					</p:column>
+					<p:column style="width:32px">
+			            <p:commandButton update="formCampeonato" 
+			                    image="ui-icon ui-icon-search">
+			                <f:setPropertyActionListener value="#{item}"
+			                    target="#{campeonatoMB.campeonatoSelecionado}" />
+			            </p:commandButton>
+			        </p:column>
+					<p:column style="text-align:center;width:20px">
+						<p:commandLink action="#{campeonatoMB.remove}" update="formCampeonato" style="color:red;font-weight:bold;text-decoration:none;">
+							<h:outputText value=" X "/>
+							<f:setPropertyActionListener value="#{item}" target="#{campeonatoMB.campeonatoExcluido}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			<br />
+			<p:panel id="pnlCampeonatoSelecionado" header="#{campeonatoMB.campeonatoSelecionado.nome}" 
+    			style="width:95%;margin-left: auto;margin-right: auto;" rendered="#{not empty campeonatoMB.campeonatoSelecionado}">
+    			<p:pickList value="#{campeonatoMB.usuarios}"
+                    var="item" converter="usuario"
+                    itemLabel="#{item.nome}" 
+                    itemValue="#{item}" >
+			        <f:facet name="sourceCaption">r</f:facet>
+			        <f:facet name="targetCaption">s</f:facet>
+			    </p:pickList>
+			    <br />
+<!--			    <p:pickList value="#{campeonatoMB.times}"-->
+<!--                    var="item" iconOnly="true" effect="bounce"-->
+<!--                    itemLabel="#{item.abreviacao}"-->
+<!--                    itemValue="#{item}" -->
+<!--                    showSourceControls="true" showTargetControls="true">-->
+<!--			        <f:facet name="sourceCaption">Times Disponíveis</f:facet>-->
+<!--			        <f:facet name="targetCaption">Times Selecionados</f:facet>-->
+<!--			    </p:pickList>-->
+			    <br />
+			    <p:commandButton value="Sorteia" actionListener="#{campeonatoMB.sorteia}"/>
+    		</p:panel>
+    	</h:form>
+    </ui:define>
+	  
+</ui:composition>

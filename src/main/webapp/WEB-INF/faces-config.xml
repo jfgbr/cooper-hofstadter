@@ -22,4 +22,9 @@
 			<to-view-id>/pages/usuario.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<converter>
+        <converter-id>usuario</converter-id>
+        <converter-class>br.galante.webapp.futebol.converter.UsuarioConverter</converter-class>
+    </converter>
 </faces-config>

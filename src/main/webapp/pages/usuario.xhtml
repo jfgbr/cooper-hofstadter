@@ -6,9 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"      
 	  template="/templates/template.xhtml">
     <ui:define name="content">
-    	<p:resource></p:resource>
     	<h:form id="formUsuario">
-			<br />
 		  	<p:panel header="Incluir um Participante" 
     			style="width:95%;margin-left: auto;margin-right: auto;">
 			  	<h:panelGrid columns="4" width="100%">
@@ -38,9 +36,9 @@
 			  	</h:panelGrid>
 			  	
 			  	<br/>
-				<h:commandButton rendered="false" value="Salvar" actionListener="#{usuarioMB.saveUsuario}" />
+				<h:commandButton rendered="false" value="Salvar" actionListener="#{usuarioMB.save}" />
 				<p:commandButton value="Salvar" update="lstUsuarios" 
-					actionListener="#{usuarioMB.saveUsuario}" style="margin-right:20px;" />
+					actionListener="#{usuarioMB.save}" style="margin-right:20px;" />
 			</p:panel>
     		<br/>
     		<p:panel header="Lista de Participantes" 

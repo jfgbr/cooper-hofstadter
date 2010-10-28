@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
@@ -15,64 +17,62 @@ import br.galante.webapp.futebol.model.Usuario;
 
 @Named("usuarioMB")
 @SessionScoped
-public class UsuarioMB implements Serializable{
+public class UsuarioMB extends GenericMB<Usuario> implements Serializable {
 
 	private static final long serialVersionUID = 8243985854752413897L;
 
 	@Inject
-	private UsuarioDAO usuarioDAO;	
+	private UsuarioDAO usuarioDAO;
 
 	private List<Usuario> lstUsuario;
-	
+
 	private Usuario usuario = new Usuario();
 	private Usuario usuarioExcluido;
-	
-	public void saveUsuario(ActionEvent actionEvent) {
+
+	public void save(ActionEvent actionEvent){
 		try {
 			usuarioDAO.insert(usuario);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Os dados foram gravados com sucesso!"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro ao gravar os dados!"));
 		}
-		//once saved, we want to clear the values
-		usuario = new Usuario();
-//		return "usuario";
 	}
 	
 	public void remove(){
 		try {
-			usuarioDAO.remove(usuarioDAO.findById(usuarioExcluido.getIdUsuario()));
+			usuarioDAO.remove(usuarioExcluido);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		return "usuario";
 	}
 	
 	public List<Usuario> getUsuarios() {
 		lstUsuario = usuarioDAO.findAll();
 		return lstUsuario;
 	}
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
-	
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	public List<SelectItem> getComboUsuarios(){
-		
+
+	public List<SelectItem> getComboUsuarios() {
+
 		List<SelectItem> cmbUsuarios = new ArrayList<SelectItem>();
-		
+
 		if (lstUsuario == null)
 			getUsuarios();
-		
+
 		for (Usuario usuario : lstUsuario) {
-			cmbUsuarios.add(new SelectItem(usuario.getIdUsuario(), usuario.getNome()));
+			cmbUsuarios.add(new SelectItem(usuario.getIdUsuario(), usuario
+					.getNome()));
 		}
-		
-		return cmbUsuarios;		
+
+		return cmbUsuarios;
 	}
 
 	public Usuario getUsuarioExcluido() {
@@ -81,5 +81,6 @@ public class UsuarioMB implements Serializable{
 
 	public void setUsuarioExcluido(Usuario usuarioExcluido) {
 		this.usuarioExcluido = usuarioExcluido;
+//		setPojo(usuarioExcluido);
 	}
 }

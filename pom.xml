@@ -5,7 +5,7 @@
 		 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.galante.webapp</groupId>
-	<artifactId>futebol</artifactId>
+	<artifactId>cooper-hofstadter</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 

@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -43,6 +45,11 @@ public class Local implements java.io.Serializable {
 		return this.idLocal;
 	}
 
+	@Transient
+	public Integer getId(){
+		return this.idLocal;
+	}
+	
 	public void setIdLocal(Integer idLocal) {
 		this.idLocal = idLocal;
 	}

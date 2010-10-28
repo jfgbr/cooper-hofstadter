@@ -5,6 +5,8 @@ package br.galante.webapp.futebol.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -36,6 +38,11 @@ public class TipoPartida implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idTipoPartida", unique = true, nullable = false)
 	public Integer getIdTipoPartida() {
+		return this.idTipoPartida;
+	}
+	
+	@Transient
+	public Integer getId(){
 		return this.idTipoPartida;
 	}
 

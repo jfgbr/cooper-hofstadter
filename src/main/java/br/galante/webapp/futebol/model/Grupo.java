@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -40,6 +42,11 @@ public class Grupo implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idGrupo", unique = true, nullable = false)
 	public Integer getIdGrupo() {
+		return this.idGrupo;
+	}
+	
+	@Transient
+	public Integer getId(){
 		return this.idGrupo;
 	}
 
